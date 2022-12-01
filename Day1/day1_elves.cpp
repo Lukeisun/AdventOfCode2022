@@ -19,7 +19,6 @@ int main() {
         }
         currCount += std::stoi(line);
       }
-      // std::cout << line << '\n';
       int sum = 0;
       for (int i = 0; i < 3; i++) {
         std::cout << top.top() << std::endl;
@@ -30,6 +29,3 @@ int main() {
     }
     return 0;
 }
-
-
-
