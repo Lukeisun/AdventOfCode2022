@@ -38,12 +38,11 @@ public class Day5{
                 list.get(to).addFirst(c);
                 
                 Character c2 = list2.get(from).pop();
-                list2.get(to).addLast(c2);
-                //temp.addFirst(c2);
+                temp.addFirst(c2);
             }
-            // while (!temp.isEmpty()) {
-            //     list2.get(to).addFirst(temp.removeFirst());
-            // }
+            while (!temp.isEmpty()) {
+                list2.get(to).addFirst(temp.removeFirst());
+            }
         }
         for (ArrayDeque<Character> stack : list) {
             System.out.print(stack.peek());
