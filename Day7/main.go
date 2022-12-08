@@ -58,7 +58,6 @@ func smallestToDelete(currDir *Dir, available int, max *int, needed int, smalles
 		smallestToDelete(currDir.children[i], available, max, needed, smallest)
 	}
 }
-
 func cd(currDir *Dir, s string) *Dir {
 	strs := strings.Split(s, " ")
 	if strs[2] == ".." {
