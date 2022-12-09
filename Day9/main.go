@@ -39,26 +39,23 @@ func part1() {
 			modifier = -1
 		}
 		var temp [2]int
+		var length int
+		traverseRL := 0
+		traverseUD := 0
 		if to[0] != 0 {
-			for i := 0; i < int(math.Abs(float64(to[0]))); i++ {
-				temp = [2]int{head[0] + modifier, head[1]}
-				if !inDistance(tail, temp) {
-					//fmt.Println("is in distance")
-					tail = head
-					visited[tail] = true
-					//fmt.Println(visited)
-				}
-				head = temp
-			}
+			length = int(math.Abs(float64(to[0])))
+			traverseRL = 1
 		} else if to[1] != 0 {
-			for i := 0; i < int(math.Abs(float64(to[1]))); i++ {
-				temp = [2]int{head[0], head[1] + modifier}
-				if !inDistance(tail, temp) {
-					tail = head
-					visited[tail] = true
-				}
-				head = temp
+			length = int(math.Abs(float64(to[1])))
+			traverseUD = 1
+		}
+		for i := 0; i < length; i++ {
+			temp = [2]int{head[0] + traverseRL*modifier, head[1] + traverseUD*modifier}
+			if !inDistance(tail, temp) {
+				tail = head
+				visited[tail] = true
 			}
+			head = temp
 		}
 	}
 	fmt.Println(len(visited))
