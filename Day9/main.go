@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	//input := "test.in"
+	// input := "test.in"
 	input := "input.in"
 	part1(input)
 	part2(input)
@@ -51,42 +51,60 @@ func part2(input string) {
 			length = int(math.Abs(float64(to[1])))
 			traverseUD = 1
 		}
-		//fmt.Println(strs)
+		//fmt.Println("\n\n", strs, "\n\n")
 		for i := 0; i < length; i++ {
 			knots[0] = [2]int{knots[0][0] + traverseRL*modifier, knots[0][1] + traverseUD*modifier}
 			for j := 1; j < 10; j++ {
-				//fmt.Println("Knots: ", knots)
 				curr := knots[j]
 				parent := knots[j-1]
 				deltaX := parent[0] - curr[0]
 				deltaY := parent[1] - curr[1]
 				absX := (math.Abs(float64(deltaX)))
 				absY := (math.Abs(float64(deltaY)))
-				flag := true
 				if absX == 0 && absY == 2 {
-					//fmt.Println("Vert")
-					knots[j][1] += modifier
+					mod := 1
+					if deltaY < 0 {
+						mod = -1
+					}
+					knots[j][1] += mod
 				} else if absY == 0 && absX == 2 {
-					//fmt.Println("Horiz")
-					knots[j][0] += modifier
+					mod := 1
+					if deltaX < 0 {
+						mod = -1
+					}
+					knots[j][0] += mod
 				} else if absX > 0 && absY > 0 && !inDistance(curr, parent) {
-					//fmt.Println("Diag")
 					deltaX /= int(math.Abs(float64(deltaX)))
 					deltaY /= int(math.Abs(float64(deltaY)))
 					knots[j][0] += deltaX
 					knots[j][1] += deltaY
 				} else {
-					flag = false
-				}
-				if flag && j == 10 {
-					visited[curr] = 1
-				}
-				if !flag {
 					break
+				}
+				if j == 9 {
+					visited[knots[j]] = 1
 				}
 			}
 		}
+
 	}
+	// var screen [][]string
+	// for i := 0; i < 100; i++ {
+	// 	row := make([]string, 100)
+	// 	for j := 0; j < 100; j++ {
+	// 		row[j] = "."
+	// 	}
+	// 	screen = append(screen, row)
+	// }
+	// for k, _ := range visited {
+	// 	screen[k[1]+20][k[0]+20] = "#"
+	// }
+	// for row := 0; row < 100; row++ {
+	// 	for col := 0; col < 100; col++ {
+	// 		fmt.Print(screen[row][col], "")
+	// 	}
+	// 	fmt.Print("\n")
+	// }
 	fmt.Println(len(visited))
 
 }
