@@ -3,6 +3,7 @@ import sys
 def bfs(grid, endingPosition, m):
     queue = [endingPosition]
     dirArray = [(0,1), (0,-1), (1,0), (-1,0)]
+    dirGrid = [['.' for i in range(len(grid[0]))] for j in range(len(grid))]
     while len(queue) > 0:
         curr = queue.pop(0)
         currRow = curr[0]
@@ -13,8 +14,22 @@ def bfs(grid, endingPosition, m):
             if nextRow < 0 or nextCol < 0 or nextRow >= len(grid) or nextCol >= len(grid[0]):
                 continue
             if grid[currRow][currCol] <= grid[nextRow][nextCol]+1 and (nextRow, nextCol) not in m:
+                if dir == (0,1):
+                    dirGrid[nextRow][nextCol] = '>'
+                elif dir == (0,-1):
+                    dirGrid[nextRow][nextCol] = '<'
+                elif dir == (1,0):
+                    dirGrid[nextRow][nextCol] = 'v'
+                elif dir == (-1,0):
+                    dirGrid[nextRow][nextCol] = '^'
                 m[(nextRow, nextCol)] = curr[2] + 1
                 queue.append((nextRow, nextCol, curr[2]+1)) 
+    dirGrid[endingPosition[0]][endingPosition[1]] = 'E'
+    dirGrid[20][0] = 'S'
+    for row in range(len(dirGrid)):
+        for col in range(len(dirGrid[row])):
+            print(dirGrid[row][col], end='')
+        print()
     return m
 if __name__ == "__main__":
     grid =[]
@@ -34,7 +49,7 @@ if __name__ == "__main__":
             else:
                 grid[row][col] = ord(grid[row][col]) - ord('a')
     m = dict(endingPosition=0)
-    bfs(grid, startingpos, endingPosition, m)
+    bfs(grid, endingPosition, m)
     print(m[(startingpos[0], startingpos[1])])
     min = float("inf")
     for a in elevationsOfA:
