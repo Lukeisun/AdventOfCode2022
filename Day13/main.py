@@ -6,7 +6,7 @@ def buildlist(p):
     return li
 
 def inOrder(p1, p2):
-    flag = True
+    flag = None
     for i in range(len(p1)):
        # print(p1, p2)
         seq1 = p1.pop(0)
