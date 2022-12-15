@@ -50,8 +50,6 @@ if __name__ == "__main__":
         # print(flag)
         sorted.append(p1)
         sorted.append(p2)
-        #if flag is None: flag = True
-        # if len(p1) == 0: flag = True
         if flag:
             # print(idx)
             count += idx
